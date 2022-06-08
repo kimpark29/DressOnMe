@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.capstone.dressonme.R
 import com.capstone.dressonme.databinding.FragmentModelBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ModelFragment : Fragment() {
 
     private var _binding: FragmentModelBinding? = null

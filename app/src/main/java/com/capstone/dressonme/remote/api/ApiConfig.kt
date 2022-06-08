@@ -13,7 +13,7 @@ object ApiConfig {
       .addInterceptor(loggingInterceptor)
       .build()
     val retrofit = Retrofit.Builder()
-      .baseUrl("https://restapidressonme.herokuapp.com/api/user/")
+      .baseUrl("https://restapidressonme.herokuapp.com/")
       .addConverterFactory(GsonConverterFactory.create())
       .client(client)
       .build()

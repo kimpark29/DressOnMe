@@ -10,11 +10,15 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.dressonme.databinding.ActivityLoginBinding
+import com.capstone.dressonme.helper.ViewModelFactory
 import com.capstone.dressonme.local.User
 import com.capstone.dressonme.local.UserPreference
+import com.capstone.dressonme.ui.viewmodel.LoginViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("settings")
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var user: User
     private lateinit var LogViewModel: LoginViewModel
@@ -27,11 +31,11 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        setupViewmodel()
+        setupViewModel()
         setAction()
     }
 
-    private fun setupViewmodel() {
+    private fun setupViewModel() {
         LogViewModel = ViewModelProvider(
             this,
             ViewModelFactory(UserPreference.getInstance(dataStore))

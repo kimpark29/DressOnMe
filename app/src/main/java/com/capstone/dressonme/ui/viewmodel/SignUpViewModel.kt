@@ -1,16 +1,18 @@
-package com.capstone.dressonme.ui
+package com.capstone.dressonme.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.capstone.dressonme.remote.api.ApiConfig
 import com.capstone.dressonme.remote.response.ApiResponse
+import com.capstone.dressonme.ui.ApiCallbackString
+import dagger.hilt.android.lifecycle.HiltViewModel
 import org.json.JSONObject
 import org.json.JSONTokener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
+@HiltViewModel
 class SignUpViewModel : ViewModel() {
 
   fun register(name: String, email: String, pass: String, callback: ApiCallbackString){

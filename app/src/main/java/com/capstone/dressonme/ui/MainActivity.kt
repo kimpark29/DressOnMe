@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import com.capstone.dressonme.R
 import com.capstone.dressonme.databinding.ActivityMainBinding
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 

@@ -1,4 +1,4 @@
-package com.capstone.dressonme.ui
+package com.capstone.dressonme.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -9,6 +9,8 @@ import com.capstone.dressonme.local.User
 import com.capstone.dressonme.local.UserPreference
 import com.capstone.dressonme.remote.api.ApiConfig
 import com.capstone.dressonme.remote.response.LoginResponse
+import com.capstone.dressonme.ui.ApiCallbackString
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import org.json.JSONTokener
@@ -16,10 +18,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@HiltViewModel
 class LoginViewModel(private val pref: UserPreference) : ViewModel() {
 
     fun login(email: String, pass: String, callback: ApiCallbackString){
-
         val service = ApiConfig.getApiService().login(email, pass)
         service.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(

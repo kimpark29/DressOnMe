@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.capstone.dressonme.R
 import com.capstone.dressonme.databinding.FragmentCameraBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class CameraFragment : Fragment() {
 
     private var _binding: FragmentCameraBinding? = null

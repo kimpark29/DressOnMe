@@ -12,7 +12,10 @@ import com.capstone.dressonme.R
 import com.capstone.dressonme.ui.adapter.RecommendationAdapter
 import com.capstone.dressonme.databinding.FragmentHomeBinding
 import com.capstone.dressonme.ui.adapter.GalleryAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null

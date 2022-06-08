@@ -1,9 +1,10 @@
-package com.capstone.dressonme.ui
+package com.capstone.dressonme.helper
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.dressonme.local.UserPreference
+import com.capstone.dressonme.ui.viewmodel.LoginViewModel
+import com.capstone.dressonme.ui.viewmodel.UserViewModel
 
 class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.NewInstanceFactory() {
 

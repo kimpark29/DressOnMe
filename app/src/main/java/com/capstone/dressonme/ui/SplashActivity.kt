@@ -11,8 +11,10 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.dressonme.databinding.ActivitySplashBinding
+import com.capstone.dressonme.helper.ViewModelFactory
 import com.capstone.dressonme.local.User
 import com.capstone.dressonme.local.UserPreference
+import com.capstone.dressonme.ui.viewmodel.UserViewModel
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("settings")
 
