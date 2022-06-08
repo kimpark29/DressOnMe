@@ -37,7 +37,10 @@ def get_clothes(actual, mask, min_color, max_color):
     return result
 
 
-def transparant_img(new_path, img):
+def transparant_img(imgpath, new_path, img):
+    im = cv2.imread(imgpath)
+    size = im.shape
+
     cv2.imwrite(new_path + "dummy.png", img)
 
     img = Image.open(new_path + "dummy.png")
@@ -54,10 +57,11 @@ def transparant_img(new_path, img):
             new_els.append(el)
 
     img.putdata(new_els)
-    img.save(new_path + "dummy2.png", "PNG")
+    image = img.resize((size[1], size[0]), resample=0)
+    image.save(new_path + "dummy5.png", "PNG")
     print("Done")
 
-    return img
+    return image
 
 
 #app = Flask(__name__)
