@@ -1,29 +1,18 @@
 package com.capstone.dressonme.ui
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
 import com.capstone.dressonme.databinding.ActivityLoginBinding
-import com.capstone.dressonme.helper.ViewModelFactory
-import com.capstone.dressonme.local.User
-import com.capstone.dressonme.local.UserPreference
-import com.capstone.dressonme.ui.viewmodel.LoginViewModel
+import com.capstone.dressonme.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("settings")
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
-    private lateinit var user: User
-    private lateinit var LogViewModel: LoginViewModel
+    private val userViewModel by viewModels<UserViewModel>()
     private lateinit var binding: ActivityLoginBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -31,22 +20,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        setupViewModel()
         setAction()
-    }
-
-    private fun setupViewModel() {
-        LogViewModel = ViewModelProvider(
-            this,
-            ViewModelFactory(UserPreference.getInstance(dataStore))
-        )[LoginViewModel::class.java]
-
-        LogViewModel.getUser().observe(this) {
-            user = User(
-                it.userId,
-                it.token
-            )
-        }
     }
 
     private fun setAction() {
@@ -54,11 +28,16 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.etEmail.text.toString()
             val password = binding.etPass.text.toString()
 
-            LogViewModel.login(email, password, object : ApiCallbackString {
+            userViewModel.login(email, password, object : ApiCallbackString {
                 override fun onResponse(success: Boolean, message: String) {
                     if (success) {
                         Toast.makeText(this@LoginActivity, "Sign Up Success", Toast.LENGTH_SHORT)
                             .show()
+
+                        //save login to preference
+                        userViewModel.loginData.observe(this@LoginActivity) { user ->
+                            userViewModel.saveUser(user)
+                        }
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         intent.flags =
                             Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -67,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
 
                     } else {
                         Toast.makeText(this@LoginActivity,
-                            "Sign up failed $message",
+                            "Sign in failed, $message",
                             Toast.LENGTH_SHORT).show()
                     }
                 }

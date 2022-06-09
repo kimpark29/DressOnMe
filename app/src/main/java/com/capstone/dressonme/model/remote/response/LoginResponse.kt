@@ -1,4 +1,4 @@
-package com.capstone.dressonme.remote.response
+package com.capstone.dressonme.model.remote.response
 
 import com.google.gson.annotations.SerializedName
 

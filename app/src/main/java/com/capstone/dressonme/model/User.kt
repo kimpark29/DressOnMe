@@ -1,4 +1,4 @@
-package com.capstone.dressonme.local
+package com.capstone.dressonme.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

@@ -1,16 +1,23 @@
 package com.capstone.dressonme.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.capstone.dressonme.R
 import com.capstone.dressonme.databinding.ActivityMainBinding
+import com.capstone.dressonme.viewmodel.ProcessViewModel
+import com.capstone.dressonme.viewmodel.UserViewModel
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val userViewModel by viewModels<UserViewModel>()
+    private val processViewModel by viewModels<ProcessViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +26,29 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        checkUserState()
         firstFragment(HomeFragment.newInstance())
+        setAction()
+    }
+
+    private fun checkUserState() {
+        userViewModel.getUser().observe(this) {
+            if (it.token.isEmpty()) {
+                val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish()
+            } else {
+                processViewModel.getUserPhotos(it.token, it.userId, object : ApiCallbackString {
+                    override fun onResponse(success: Boolean, message: String) {
+                        Toast.makeText(this@MainActivity, "Fetch Data Successfully", Toast.LENGTH_SHORT).show()
+                    }
+                })
+            }
+        }
+    }
+
+    private fun setAction() {
         binding.apply {
             bottomBarNavigation.show(0)
             bottomBarNavigation.add(MeowBottomNavigation.Model(0, R.drawable.ic_home))

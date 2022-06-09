@@ -1,7 +1,7 @@
 package com.capstone.dressonme.model.di
 
-import androidx.viewbinding.BuildConfig
-import com.capstone.dressonme.remote.api.ApiService
+import com.capstone.dressonme.BuildConfig
+import com.capstone.dressonme.model.remote.api.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

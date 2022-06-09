@@ -6,14 +6,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.capstone.dressonme.databinding.ActivitySignUpBinding
-import com.capstone.dressonme.ui.viewmodel.SignUpViewModel
+import com.capstone.dressonme.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivitySignUpBinding
-    private val RegViewModel by viewModels<SignUpViewModel>()
+    private val userViewModel by viewModels<UserViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,7 @@ class SignUpActivity : AppCompatActivity() {
             val email = binding.etEmail.text.toString()
             val password = binding.etPass.text.toString()
 
-            RegViewModel.register(name, email, password, object : ApiCallbackString {
+            userViewModel.register(name, email, password, object : ApiCallbackString {
                 override fun onResponse(success: Boolean, message: String) {
                     if (success) {
                         Toast.makeText(this@SignUpActivity, "Sign Up Success", Toast.LENGTH_SHORT)
