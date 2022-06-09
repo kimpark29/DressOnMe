@@ -83,7 +83,7 @@ def index():
     mask = predict(img, model)
 
     clothes = get_clothes(img, mask, min_color, max_color)
-    result = transparant_img("result/", clothes)
+    result = transparant_img(path, "result/", clothes)
 
     return result
 
