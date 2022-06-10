@@ -15,8 +15,9 @@
         android:layout_marginTop="100dp"
         android:gravity="center"
         android:text="LOGIN"
+        android:fontFamily="@font/nunito_bold"
         android:textColor="@color/white"
-        android:textSize="36sp"
+        android:textSize="38sp"
         android:textStyle="bold" />
 
     <TextView
@@ -26,8 +27,9 @@
         android:gravity="center"
         android:letterSpacing="0.25"
         android:text="TO CONTINUE"
+        android:fontFamily="@font/nunito_semibold"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="22sp" />
 
     <com.capstone.dressonme.ui.mycustomview.MyEmailEditText
         android:id="@+id/et_email"
@@ -65,9 +67,10 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/bg_button_log"
         android:text="Login"
+        android:fontFamily="@font/nunito_bold"
         android:textAllCaps="false"
         android:textColor="@color/enable_icon_color"
-        android:textSize="20sp"
+        android:textSize="22sp"
         app:backgroundTint="@color/white" />
 
     <LinearLayout
@@ -80,8 +83,9 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="Don't have an account? "
+            android:fontFamily="@font/nunito_bold"
             android:textColor="@color/background_color"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
         <TextView
             android:id="@+id/tv_reg"
@@ -90,8 +94,9 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="Sign up"
+            android:fontFamily="@font/nunito_bold"
             android:textColor="#4AC7FF"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold"/>
     </LinearLayout>
 

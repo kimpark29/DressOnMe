@@ -71,7 +71,7 @@ data class ProcessDetail(
     val V: Int? = null,
 
     @field:SerializedName("_id")
-    val id: String? = null,
+    val id: String,
 
     @field:SerializedName("linkResult")
     val linkResult: Any? = null,

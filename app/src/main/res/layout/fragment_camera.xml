@@ -1,53 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CameraFragment"
+    android:background="@color/background_color"
     android:orientation="vertical"
-    android:background="@color/background_color">
+    tools:context=".ui.CameraFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Step 2 of 3"
-        android:gravity="center"
         android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="Step 2 of 3"
         android:textSize="16sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/encodesans_semibold"
+        android:gravity="center"
         android:text="Upload Your Photo"
-        android:textStyle="bold"
         android:textSize="20sp"
-        android:gravity="center" />
+        android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/image_preview"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
         android:layout_width="250dp"
         android:layout_height="360dp"
-        android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:background="@drawable/image_preview" />
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="20dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/image_preview"
+            android:layout_width="250dp"
+            android:layout_height="362dp"
+            android:layout_gravity="center"
+            android:background="@drawable/image_preview"
+            android:scaleType="centerCrop"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
 
     <Button
+        android:id="@+id/btn_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/custom_button"
+        android:paddingHorizontal="40dp"
         android:text="Open Camera"
         android:textAllCaps="false"
-        android:layout_marginTop="30dp"
-        android:paddingHorizontal="40dp"
-        android:textSize="16sp"
-        android:layout_gravity="center"
-        android:background="@drawable/custom_button"/>
+        android:textSize="16sp" />
 
     <ImageButton
         android:id="@+id/btn_next"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_forward"
-        android:background="@drawable/custom_circle_button"/>
+        android:layout_marginTop="20dp"
+        android:background="@drawable/custom_circle_button"
+        android:src="@drawable/ic_forward" />
 </LinearLayout>

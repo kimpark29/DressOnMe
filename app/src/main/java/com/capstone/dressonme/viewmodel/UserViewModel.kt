@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.capstone.dressonme.model.User
 import com.capstone.dressonme.model.UserPreference
 import com.capstone.dressonme.model.repo.UserRepository
-import com.capstone.dressonme.ui.ApiCallbackString
+import com.capstone.dressonme.helper.ApiCallbackString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

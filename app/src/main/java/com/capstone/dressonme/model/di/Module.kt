@@ -11,11 +11,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 @Module
 @InstallIn(SingletonComponent::class)
 object Module {
 
-    var BASE_URL_API = "https://restapidressonme.herokuapp.com/"
+    private var BASE_URL_API = "https://dressonmeapi-clh64ny43a-et.a.run.app/"
 
     @Provides
     fun provideRetrofit(): Retrofit {

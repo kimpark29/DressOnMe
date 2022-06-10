@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.capstone.dressonme.model.remote.api.ApiService
 import com.capstone.dressonme.model.remote.response.*
-import com.capstone.dressonme.ui.ApiCallbackString
+import com.capstone.dressonme.helper.ApiCallbackString
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -92,7 +92,7 @@ class ProcessRepository @Inject constructor(
         })
     }
 
-    fun startProcess(token : String, userId : String, imgFile : File, callback: ApiCallbackString ){
+    fun startProcess(token : String, userId : String, imgFile : File, callback: ApiCallbackString){
         val requestImage = imgFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
         val uId = userId.toRequestBody("text/plain".toMediaType())
         val imageModel = MultipartBody.Part.createFormData(
@@ -128,7 +128,7 @@ class ProcessRepository @Inject constructor(
         })
     }
 
-    fun updateResult(token : String, id : String, imgFile : File, callback: ApiCallbackString ){
+    fun updateResult(token : String, id : String, imgFile : File, callback: ApiCallbackString){
         val requestImage = imgFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
         val imageModel = MultipartBody.Part.createFormData(
             "linkModel",
@@ -163,7 +163,7 @@ class ProcessRepository @Inject constructor(
         })
     }
 
-    fun deleteProcess(token : String, id : String, callback: ApiCallbackString ) {
+    fun deleteProcess(token : String, id : String, callback: ApiCallbackString) {
         val client = apiService.deleteProcess(token, id)
         client.enqueue(object : Callback<ApiResponse> {
             override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {

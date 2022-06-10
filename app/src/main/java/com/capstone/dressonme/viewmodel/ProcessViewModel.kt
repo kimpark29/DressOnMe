@@ -2,12 +2,10 @@ package com.capstone.dressonme.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.capstone.dressonme.model.User
-import com.capstone.dressonme.model.UserPreference
 import com.capstone.dressonme.model.remote.response.ProcessDetail
 import com.capstone.dressonme.model.remote.response.ProcessItem
 import com.capstone.dressonme.model.repo.ProcessRepository
-import com.capstone.dressonme.ui.ApiCallbackString
+import com.capstone.dressonme.helper.ApiCallbackString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.File
 import javax.inject.Inject
@@ -24,7 +22,7 @@ class ProcessViewModel @Inject constructor (
         processRepository.getUserPhoto(token, userId, callback)
     }
 
-    fun startProcess(token : String, userId : String, imgFile : File, callback: ApiCallbackString) {
+    fun startProcess(token: String, userId: String, imgFile: File, callback: ApiCallbackString) {
         processRepository.startProcess(token, userId, imgFile, callback)
     }
 

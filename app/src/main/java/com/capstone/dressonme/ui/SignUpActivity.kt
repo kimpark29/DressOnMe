@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.capstone.dressonme.databinding.ActivitySignUpBinding
+import com.capstone.dressonme.helper.ApiCallbackString
 import com.capstone.dressonme.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

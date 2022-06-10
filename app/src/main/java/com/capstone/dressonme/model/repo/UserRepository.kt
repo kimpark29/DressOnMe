@@ -7,7 +7,7 @@ import com.capstone.dressonme.model.User
 import com.capstone.dressonme.model.remote.api.ApiService
 import com.capstone.dressonme.model.remote.response.ApiResponse
 import com.capstone.dressonme.model.remote.response.LoginResponse
-import com.capstone.dressonme.ui.ApiCallbackString
+import com.capstone.dressonme.helper.ApiCallbackString
 import org.json.JSONObject
 import org.json.JSONTokener
 import retrofit2.Call
@@ -42,7 +42,6 @@ class UserRepository @Inject constructor(
                     callback.onResponse(false, message)
                 }
             }
-
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.e(TAG, "onFailure: ${t.message}")
                 callback.onResponse(false, t.message.toString())
@@ -68,7 +67,6 @@ class UserRepository @Inject constructor(
                     callback.onResponse(false, message)
                 }
             }
-
             override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
                 Log.e(TAG, "onFailure2: ${t.message}")
                 callback.onResponse(false, t.message.toString())

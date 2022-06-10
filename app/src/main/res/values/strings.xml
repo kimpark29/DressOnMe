@@ -10,6 +10,9 @@
     <string name="wrong_password">Password must be at least 6 characters</string>
     <string name="must_fill">Name must be at least 6 characters</string>
     <string name="wrong_email">Not a valid email</string>
+    <string name="error_pick_image">Error pick image</string>
+    <string name="error_showing_camera">Error showing camera</string>
+    <string name="permission_not_granted">Permission not granted</string>
 
     <integer-array name="data_photo">
         <item>@drawable/kemejacoklat</item>
