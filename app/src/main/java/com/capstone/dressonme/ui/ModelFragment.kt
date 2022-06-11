@@ -49,7 +49,7 @@ class ModelFragment : Fragment() {
 
     private fun checkUserProcess() {
         processViewModel.getProcess().observe(viewLifecycleOwner) {
-            if(it != null && it._id != "") {
+            if (it != null && it._id != "") {
                 val fragmentTransition = requireActivity().supportFragmentManager.beginTransaction()
                 fragmentTransition.replace(R.id.fragmentContainer, CameraFragment()).commit()
             }
@@ -94,13 +94,21 @@ class ModelFragment : Fragment() {
                     imgFile,
                     object : ApiCallbackString {
                         override fun onResponse(success: Boolean, message: String) {
-                            Toast.makeText(activity, message, Toast.LENGTH_SHORT)
-                                .show()
+
                             processViewModel.userProcess.observe(viewLifecycleOwner) { process ->
                                 processViewModel.saveProcess(process)
-                                val fragmentTransition = requireActivity().supportFragmentManager.beginTransaction()
-                                fragmentTransition.replace(R.id.fragmentContainer, CameraFragment()).commit()
+                                val fragmentTransition =
+                                    requireActivity().supportFragmentManager.beginTransaction()
+                                fragmentTransition.replace(R.id.fragmentContainer, CameraFragment())
+                                    .commit()
                             }
+
+                            processViewModel.triggerCloudRun(it.token, object : ApiCallbackString {
+                                override fun onResponse(success: Boolean, message: String) {
+                                    Toast.makeText(activity, message, Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                            })
                         }
                     })
             }

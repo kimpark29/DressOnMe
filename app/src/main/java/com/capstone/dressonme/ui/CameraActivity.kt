@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -58,26 +57,30 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun getUserProcess() {
-        userViewModel.getUser().observe(this) {
 
-            processViewModel.userProcess.observe(this) { processDetail ->
-                Toast.makeText(this@CameraActivity, "IDnya :  ${processDetail._id}", Toast.LENGTH_SHORT)
+        userViewModel.getUser().observe(this) {
+            processViewModel.getProcess().observe(this) { processDetail ->
+                Toast.makeText(this@CameraActivity,
+                    "IDnya :  ${processDetail.linkFiltering}",
+                    Toast.LENGTH_SHORT)
                     .show()
-                Log.d("test", processDetail._id)
+
                 processViewModel.getUserProcess(it.token,
                     processDetail._id,
                     object : ApiCallbackString {
                         override fun onResponse(success: Boolean, message: String) {
-                            Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT)
-                                .show()
+                            processViewModel.userProcess.observe(this@CameraActivity) {
+                                processViewModel.saveProcess(it)
+                                if (it.linkFiltering != "") {
+                                    Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                            }
                         }
                     })
             }
         }
 
-        processViewModel.userProcess.observe(this) {
-            Toast.makeText(this@CameraActivity, "ID " +it._id, Toast.LENGTH_SHORT).show()
-        }
 
     }
 
@@ -103,9 +106,7 @@ class CameraActivity : AppCompatActivity() {
 
     private fun takePhoto() {
         val imageCapture = imageCapture ?: return
-
         val photoFile = createFile(application)
-
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
         imageCapture.takePicture(
             outputOptions,

@@ -37,6 +37,10 @@ class ProcessViewModel @Inject constructor (
         processRepository.getUserProcess(token, id, callback)
     }
 
+    fun triggerCloudRun(token : String, callback: ApiCallbackString) {
+        processRepository.triggerCloudRun(token, callback)
+    }
+
     fun updateResult(token : String, id : String, imgFile : File, callback: ApiCallbackString) {
         processRepository.updateResult(token, id, imgFile, callback)
     }
@@ -52,6 +56,12 @@ class ProcessViewModel @Inject constructor (
     fun saveProcess(process: Process) {
         viewModelScope.launch {
             pref.saveProcess(process)
+        }
+    }
+
+    fun delete() {
+        viewModelScope.launch {
+            pref.deleteProses()
         }
     }
 }

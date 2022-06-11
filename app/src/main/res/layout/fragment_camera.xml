@@ -8,10 +8,18 @@
     android:orientation="vertical"
     tools:context=".ui.CameraFragment">
 
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_back"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="-10dp"
         android:gravity="center"
         android:text="Step 2 of 3"
         android:textSize="16sp" />
@@ -28,7 +36,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view"
         android:layout_width="250dp"
-        android:layout_height="360dp"
+        android:layout_height="350dp"
         android:layout_marginTop="30dp"
         android:clickable="true"
         android:focusable="true"

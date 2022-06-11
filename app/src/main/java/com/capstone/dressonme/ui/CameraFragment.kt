@@ -14,10 +14,15 @@ import androidx.fragment.app.viewModels
 import com.capstone.dressonme.R
 import com.capstone.dressonme.databinding.FragmentCameraBinding
 import com.capstone.dressonme.helper.ApiCallbackString
+import com.capstone.dressonme.helper.reduceFileImage
 import com.capstone.dressonme.helper.rotateBitmap
 import com.capstone.dressonme.viewmodel.ProcessViewModel
 import com.capstone.dressonme.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 @AndroidEntryPoint
@@ -40,31 +45,67 @@ class CameraFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getUserProcess()
+//        getUserProcess()
 
         binding.btnNext.setOnClickListener {
+            addImg()
             val fragmentTransition = requireActivity().supportFragmentManager.beginTransaction()
             fragmentTransition.replace(R.id.fragmentContainer, ResultFragment()).commit()
         }
 
         binding.btnCamera.setOnClickListener { startCameraX() }
         binding.cardView.setOnClickListener { startCameraX() }
+        back()
     }
 
-    private fun getUserProcess() {
-        processViewModel.getProcess().observe(viewLifecycleOwner) { process ->
-            Toast.makeText(context, process._id, Toast.LENGTH_SHORT).show()
-            userViewModel.getUser().observe(viewLifecycleOwner) { user ->
-                processViewModel.getUserProcess(user.token, process._id, object : ApiCallbackString  {
-                    override fun onResponse(success: Boolean, message: String) {
-                        processViewModel.userProcess.observe(viewLifecycleOwner) {
-                            processViewModel.saveProcess(it)
-                            if(it.linkFiltering != "") {
-                                Toast.makeText(context, "Update User Process Success", Toast.LENGTH_SHORT).show()
+    private fun back() {
+        binding.btnBack.setOnClickListener {
+//            processViewModel.delete()
+            val fragmentTransition = requireActivity().supportFragmentManager.beginTransaction()
+            fragmentTransition.replace(R.id.fragmentContainer, ModelFragment()).commit()
+        }
+    }
+
+//    private fun getUserProcess() {
+//        processViewModel.getProcess().observe(viewLifecycleOwner) { process ->
+//            Toast.makeText(context, process._id, Toast.LENGTH_SHORT).show()
+//            userViewModel.getUser().observe(viewLifecycleOwner) { user ->
+//                processViewModel.getUserProcess(user.token,
+//                    process._id,
+//                    object : ApiCallbackString {
+//                        override fun onResponse(success: Boolean, message: String) {
+//                            processViewModel.userProcess.observe(viewLifecycleOwner) {
+//                                processViewModel.saveProcess(it)
+//                                if (it.linkFiltering != "") {
+//                                    Toast.makeText(context,
+//                                        "Update User Process Success",
+//                                        Toast.LENGTH_SHORT).show()
+//                                }
+//                            }
+//                        }
+//                    })
+//            }
+//        }
+//    }
+
+    private fun addImg() {
+        if (getFile != null) {
+            val imgFile = reduceFileImage(getFile as File)
+
+            processViewModel.getProcess().observe(viewLifecycleOwner) { process ->
+                Toast.makeText(context, process._id, Toast.LENGTH_SHORT).show()
+                userViewModel.getUser().observe(viewLifecycleOwner) { user ->
+                    processViewModel.updateResult(user.token,
+                        process._id,
+                        imgFile,
+                        object : ApiCallbackString {
+                            override fun onResponse(success: Boolean, message: String) {
+                                Toast.makeText(context,
+                                    message,
+                                    Toast.LENGTH_SHORT).show()
                             }
-                        }
-                    }
-                })
+                        })
+                }
             }
         }
     }

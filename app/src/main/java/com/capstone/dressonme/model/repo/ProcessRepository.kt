@@ -134,7 +134,7 @@ class ProcessRepository @Inject constructor(
     fun updateResult(token : String, id : String, imgFile : File, callback: ApiCallbackString){
         val requestImage = imgFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
         val imageModel = MultipartBody.Part.createFormData(
-            "linkModel",
+            "linkResult",
             imgFile.name,
             requestImage
         )
@@ -166,6 +166,30 @@ class ProcessRepository @Inject constructor(
 
         })
     }
+
+    //ProcessRepository
+    fun triggerCloudRun(token : String, callback: ApiCallbackString) {
+        val client = apiService.triggerCloudRun(token)
+        client.enqueue(object : Callback<ApiResponse> {
+            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null && !responseBody.error)
+                        callback.onResponse(response.body() != null, SUCCESS)
+                } else {
+                    Log.e(TAG, "onFailure1: ${response.message()}")
+                    val jsonObject = JSONTokener(response.errorBody()!!.string()).nextValue() as JSONObject
+                    val message = jsonObject.getString("message")
+                    callback.onResponse(false, message)
+                }
+            }
+            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+                Log.e(TAG, "onFailure: ${t.message}")
+                callback.onResponse(false, t.message.toString())
+            }
+        })
+    }
+
 
     fun deleteProcess(token : String, id : String, callback: ApiCallbackString) {
         val client = apiService.deleteProcess(token, id)

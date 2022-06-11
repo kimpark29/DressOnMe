@@ -38,6 +38,16 @@ class ProcessPreference @Inject constructor(@ApplicationContext val context: Con
         }
     }
 
+    suspend fun deleteProses() {
+        dataStore.edit {
+            it[ID] = ""
+            it[USER_ID] = ""
+            it[LINK_MODEL] = ""
+            it[LINK_FILTERING] = ""
+            it[LINK_RESULT] = ""
+        }
+    }
+
     companion object {
         private val ID = stringPreferencesKey("_id")
         private val USER_ID = stringPreferencesKey("userId")

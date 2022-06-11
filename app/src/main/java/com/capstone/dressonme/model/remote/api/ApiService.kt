@@ -28,6 +28,11 @@ interface ApiService {
     @Field("password") pass: String
   ): Call<LoginResponse>
 
+  @POST("request")
+  fun triggerCloudRun(
+    @Header("auth-token") auth: String,
+  ): Call<ApiResponse>
+
   @GET("api/process")
   fun getAllData(
     @Header("auth-token") auth: String,
@@ -47,12 +52,13 @@ interface ApiService {
     @Part("userId") userId: RequestBody
   ): Call<ProcessResponse>
 
+
   @Multipart
   @PATCH("api/process/{id}/result")
   fun updateLinkResult(
     @Header("auth-token") auth: String,
     @Path("id") _id: String,
-    @Part("linkResult") img: MultipartBody.Part,
+    @Part img: MultipartBody.Part,
   ): Call<ProcessResponse>
 
   @DELETE("api/process/{id}")
