@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.capstone.dressonme.model.remote.api.ApiService
 import com.capstone.dressonme.model.remote.response.*
 import com.capstone.dressonme.helper.ApiCallbackString
+import com.capstone.dressonme.model.Process
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -26,8 +27,8 @@ class ProcessRepository @Inject constructor(
     private val _userPhotos = MutableLiveData<ArrayList<ProcessItem>>()
     val userPhotos: LiveData<ArrayList<ProcessItem>> = _userPhotos
 
-    private val _userProcess = MutableLiveData<ProcessDetail>()
-    val userProcess: LiveData<ProcessDetail> = _userProcess
+    private val _userProcess = MutableLiveData<Process>()
+    val userProcess: LiveData<Process> = _userProcess
 
     fun getUserPhoto(token : String, userId: String, callback: ApiCallbackString) {
         val client = apiService.getAllData(token)
@@ -42,7 +43,7 @@ class ProcessRepository @Inject constructor(
                         callback.onResponse(response.body() != null, SUCCESS)
                          val userPhoto = ArrayList<ProcessItem>()
                         for (i in responseBody.process) {
-                            if(i.userId == userId && i.status == false) {
+                            if(i.userId == userId && !i.status && i.linkResult != "") {
                                 userPhoto.add(i)
                             }
                         }
@@ -73,8 +74,9 @@ class ProcessRepository @Inject constructor(
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null && !responseBody.error) {
+                        val detailProcess = responseBody.process
                         callback.onResponse(response.body() != null, SUCCESS)
-                        _userProcess.value = responseBody.process
+                        _userProcess.value = Process(detailProcess.id, detailProcess.userId, detailProcess.linkModel, detailProcess.linkFiltering, detailProcess.linkResult)
                     }
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
@@ -109,8 +111,9 @@ class ProcessRepository @Inject constructor(
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null && !responseBody.error) {
+                        val detailProcess = responseBody.process
                         callback.onResponse(response.body() != null, SUCCESS)
-                        _userProcess.value = responseBody.process
+                        _userProcess.value = Process(detailProcess.id, detailProcess.userId, detailProcess.linkModel, detailProcess.linkFiltering, detailProcess.linkResult)
                     }
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
@@ -144,8 +147,9 @@ class ProcessRepository @Inject constructor(
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null && !responseBody.error) {
+                        val detailProcess = responseBody.process
                         callback.onResponse(response.body() != null, SUCCESS)
-                        _userProcess.value = responseBody.process
+                        _userProcess.value = Process(detailProcess.id, detailProcess.userId, detailProcess.linkModel, detailProcess.linkFiltering, detailProcess.linkResult)
                     }
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")

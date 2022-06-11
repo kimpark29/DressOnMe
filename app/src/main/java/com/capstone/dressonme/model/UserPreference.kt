@@ -6,7 +6,6 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.capstone.dressonme.model.User
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -22,7 +21,9 @@ class UserPreference @Inject constructor(@ApplicationContext val context: Contex
     return dataStore.data.map {
       User(
         it[USER_ID] ?: "",
-        it[TOKEN_KEY] ?: ""
+        it[TOKEN_KEY] ?: "",
+        it[EMAIL] ?: "",
+        it[NAME] ?: ""
       )
     }
   }
@@ -31,6 +32,8 @@ class UserPreference @Inject constructor(@ApplicationContext val context: Contex
     dataStore.edit {
       it[USER_ID] = user.userId
       it[TOKEN_KEY] = user.token
+      it[EMAIL] = user.email
+      it[NAME] = user.name
     }
   }
 
@@ -38,11 +41,15 @@ class UserPreference @Inject constructor(@ApplicationContext val context: Contex
     dataStore.edit {
       it[USER_ID] = ""
       it[TOKEN_KEY] = ""
+      it[EMAIL] = ""
+      it[NAME] = ""
     }
   }
 
   companion object {
     private val USER_ID = stringPreferencesKey("userid")
     private val TOKEN_KEY = stringPreferencesKey("token")
+    private val EMAIL = stringPreferencesKey("email")
+    private val NAME = stringPreferencesKey("name")
   }
 }

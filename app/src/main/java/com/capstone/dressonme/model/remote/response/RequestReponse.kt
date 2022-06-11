@@ -20,28 +20,28 @@ data class AllProcessResponse(
 data class ProcessItem(
 
     @field:SerializedName("linkModel")
-    val linkModel: String? = null,
+    val linkModel: String,
 
     @field:SerializedName("createdAt")
-    val createdAt: String? = null,
+    val createdAt: String,
 
     @field:SerializedName("linkFiltering")
-    val linkFiltering: String? = null,
+    val linkFiltering: String,
 
     @field:SerializedName("_id")
-    val id: String? = null,
+    val id: String,
 
     @field:SerializedName("linkResult")
-    val linkResult: String? = null,
+    val linkResult: String,
 
     @field:SerializedName("userId")
-    val userId: String? = null,
+    val userId: String,
 
     @field:SerializedName("status")
-    val status: Boolean? = null,
+    val status: Boolean,
 
     @field:SerializedName("updatedAt")
-    val updatedAt: String? = null
+    val updatedAt: String
 )
 
 data class ProcessResponse(
@@ -59,29 +59,29 @@ data class ProcessResponse(
 data class ProcessDetail(
 
     @field:SerializedName("linkModel")
-    val linkModel: String? = null,
+    val linkModel: String,
 
     @field:SerializedName("createdAt")
-    val createdAt: String? = null,
+    val createdAt: String,
 
     @field:SerializedName("linkFiltering")
-    val linkFiltering: String? = null,
+    val linkFiltering: String,
 
     @field:SerializedName("__v")
-    val V: Int? = null,
+    val V: Int,
 
     @field:SerializedName("_id")
     val id: String,
 
     @field:SerializedName("linkResult")
-    val linkResult: Any? = null,
+    val linkResult: String,
 
     @field:SerializedName("userId")
-    val userId: String? = null,
+    val userId: String,
 
     @field:SerializedName("status")
-    val status: Boolean? = null,
+    val status: Boolean,
 
     @field:SerializedName("updatedAt")
-    val updatedAt: String? = null
+    val updatedAt: String
 )

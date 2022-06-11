@@ -2,21 +2,28 @@ package com.capstone.dressonme.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.capstone.dressonme.model.remote.response.ProcessDetail
 import com.capstone.dressonme.model.remote.response.ProcessItem
 import com.capstone.dressonme.model.repo.ProcessRepository
 import com.capstone.dressonme.helper.ApiCallbackString
+import com.capstone.dressonme.model.Process
+import com.capstone.dressonme.model.ProcessPreference
+import com.capstone.dressonme.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 class ProcessViewModel @Inject constructor (
-    private val processRepository: ProcessRepository
+    private val processRepository: ProcessRepository,
+    private val pref: ProcessPreference
 ) : ViewModel() {
 
     val userPhotos : LiveData<ArrayList<ProcessItem>> = processRepository.userPhotos
-    val userProcess : LiveData<ProcessDetail> = processRepository.userProcess
+    val userProcess : LiveData<Process> = processRepository.userProcess
 
     fun getUserPhotos(token : String, userId: String, callback: ApiCallbackString) {
         processRepository.getUserPhoto(token, userId, callback)
@@ -36,5 +43,15 @@ class ProcessViewModel @Inject constructor (
 
     fun deleteProcess(token : String, userId: String, callback: ApiCallbackString) {
         processRepository.deleteProcess(token, userId, callback)
+    }
+
+    fun getProcess(): LiveData<Process> {
+        return pref.getProcess().asLiveData()
+    }
+
+    fun saveProcess(process: Process) {
+        viewModelScope.launch {
+            pref.saveProcess(process)
+        }
     }
 }

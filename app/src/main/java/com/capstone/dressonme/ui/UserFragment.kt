@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
+import com.capstone.dressonme.R
 import com.capstone.dressonme.databinding.FragmentUserBinding
+import com.capstone.dressonme.model.User
 import com.capstone.dressonme.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserFragment : Fragment() {
     private var _binding: FragmentUserBinding? = null
     private val binding get() = _binding!!
-    private val userViewModel by viewModels<UserViewModel>()
+    private val userViewModel : UserViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,18 +26,42 @@ class UserFragment : Fragment() {
     ): View? {
         _binding = FragmentUserBinding.inflate(inflater, container, false)
         return binding.root
-
-
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnLogout.setOnClickListener {
-            userViewModel.logout()
-            startActivity(Intent(activity, LoginActivity::class.java))
-            activity?.finish()
+        checkUserState()
+        setAction()
+
+    }
+
+    private fun checkUserState() {
+        userViewModel.getUser().observe(viewLifecycleOwner) {
+            if (it.token.isEmpty()) {
+                val intent = Intent(context, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            } else {
+                setData(it)
+            }
         }
     }
+
+    private fun setData(user: User) {
+        userViewModel.getUser().observe(viewLifecycleOwner) {
+            binding.apply {
+                tvUserName.text = it.name
+                Glide.with(requireContext()).load(R.drawable.img).into(imgUserProfile)
+            }
+        }
+    }
+
+    private fun setAction() {
+        binding.btnLogout.setOnClickListener {
+            userViewModel.logout()
+        }
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() =

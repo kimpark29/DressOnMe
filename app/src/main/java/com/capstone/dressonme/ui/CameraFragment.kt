@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import com.capstone.dressonme.R
 import com.capstone.dressonme.databinding.FragmentCameraBinding
@@ -33,7 +32,7 @@ class CameraFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentCameraBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,7 +40,7 @@ class CameraFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        getUserProcess()
+        getUserProcess()
 
         binding.btnNext.setOnClickListener {
             val fragmentTransition = requireActivity().supportFragmentManager.beginTransaction()
@@ -52,24 +51,23 @@ class CameraFragment : Fragment() {
         binding.cardView.setOnClickListener { startCameraX() }
     }
 
-//    private fun getUserProcess() {
-//        userViewModel.getUser().observe(viewLifecycleOwner) {
-//            processViewModel.userProcess.observe(viewLifecycleOwner) { processDetail ->
-//                processViewModel.getUserProcess(it.token,
-//                    processDetail.id,
-//                    object : ApiCallbackString {
-//                        override fun onResponse(success: Boolean, message: String) {
-//                            Toast.makeText(activity, message, Toast.LENGTH_SHORT)
-//                                .show()
-//                        }
-//
-//                    })
-//                Toast.makeText(activity, processDetail.id, Toast.LENGTH_SHORT)
-//                    .show()
-//            }
-//        }
-//
-//    }
+    private fun getUserProcess() {
+        processViewModel.getProcess().observe(viewLifecycleOwner) { process ->
+            Toast.makeText(context, process._id, Toast.LENGTH_SHORT).show()
+            userViewModel.getUser().observe(viewLifecycleOwner) { user ->
+                processViewModel.getUserProcess(user.token, process._id, object : ApiCallbackString  {
+                    override fun onResponse(success: Boolean, message: String) {
+                        processViewModel.userProcess.observe(viewLifecycleOwner) {
+                            processViewModel.saveProcess(it)
+                            if(it.linkFiltering != "") {
+                                Toast.makeText(context, "Update User Process Success", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                })
+            }
+        }
+    }
 
     private fun startCameraX() {
         val intent = Intent(activity, CameraActivity::class.java)

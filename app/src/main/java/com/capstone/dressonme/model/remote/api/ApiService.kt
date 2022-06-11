@@ -33,10 +33,10 @@ interface ApiService {
     @Header("auth-token") auth: String,
   ): Call<AllProcessResponse>
 
-  @GET("api/process/{_id}")
+  @GET("api/process/{id}")
   fun getUserProcess(
     @Header("auth-token") auth: String,
-    @Path("_id") _id: String,
+    @Path("id") id: String,
   ): Call<ProcessResponse>
 
   @Multipart
@@ -48,17 +48,17 @@ interface ApiService {
   ): Call<ProcessResponse>
 
   @Multipart
-  @PATCH("api/process/{_id}/result")
+  @PATCH("api/process/{id}/result")
   fun updateLinkResult(
     @Header("auth-token") auth: String,
-    @Path("_id") _id: String,
+    @Path("id") _id: String,
     @Part("linkResult") img: MultipartBody.Part,
   ): Call<ProcessResponse>
 
-  @DELETE("api/process/{_id}")
+  @DELETE("api/process/{id}")
   fun deleteProcess(
     @Header("auth-token") auth: String,
-    @Path("_id") _id: String,
+    @Path("id") _id: String,
   ): Call<ApiResponse>
 
 }

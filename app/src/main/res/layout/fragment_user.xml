@@ -10,6 +10,7 @@
     android:orientation="vertical">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_userProfile"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginTop="100dp"
@@ -19,6 +20,7 @@
         />
 
     <TextView
+        android:id="@+id/tv_userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

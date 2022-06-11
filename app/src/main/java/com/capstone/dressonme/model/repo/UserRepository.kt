@@ -33,7 +33,7 @@ class UserRepository @Inject constructor(
                     val responseBody = response.body()
                     if (responseBody != null && !responseBody.error) {
                         callback.onResponse(response.body() != null, SUCCESS)
-                        _loginData.value = User(responseBody.userId, responseBody.authToken)
+                        _loginData.value = User(responseBody.userId, responseBody.authToken, responseBody.email, responseBody.name)
                     }
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")

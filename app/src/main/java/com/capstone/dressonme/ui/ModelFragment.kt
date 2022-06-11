@@ -43,13 +43,25 @@ class ModelFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        checkUserProcess()
+        setAction()
+    }
 
+    private fun checkUserProcess() {
+        processViewModel.getProcess().observe(viewLifecycleOwner) {
+            if(it != null && it._id != "") {
+                val fragmentTransition = requireActivity().supportFragmentManager.beginTransaction()
+                fragmentTransition.replace(R.id.fragmentContainer, CameraFragment()).commit()
+            }
+        }
+    }
+
+    private fun setAction() {
         binding.btnGallery.setOnClickListener { startGallery() }
         binding.cardView.setOnClickListener { startGallery() }
         binding.btnNext.setOnClickListener {
             addImageModel()
         }
-
     }
 
     private fun startGallery() {
@@ -73,7 +85,6 @@ class ModelFragment : Fragment() {
     }
 
     private fun addImageModel() {
-
         if (getFile != null) {
             val imgFile = reduceFileImage(getFile as File)
 
@@ -85,11 +96,14 @@ class ModelFragment : Fragment() {
                         override fun onResponse(success: Boolean, message: String) {
                             Toast.makeText(activity, message, Toast.LENGTH_SHORT)
                                 .show()
+                            processViewModel.userProcess.observe(viewLifecycleOwner) { process ->
+                                processViewModel.saveProcess(process)
+                                val fragmentTransition = requireActivity().supportFragmentManager.beginTransaction()
+                                fragmentTransition.replace(R.id.fragmentContainer, CameraFragment()).commit()
+                            }
                         }
                     })
             }
-            val fragmentTransition = requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransition.replace(R.id.fragmentContainer, CameraFragment()).commit()
 
         } else {
             Toast.makeText(activity,

@@ -74,6 +74,7 @@ dependencies {
 
     //hilt
     implementation "com.google.dagger:hilt-android:2.41"
+    implementation 'androidx.camera:camera-core:1.0.2'
     kapt "com.google.dagger:hilt-compiler:2.41"
 
     testImplementation 'junit:junit:4.13.2'

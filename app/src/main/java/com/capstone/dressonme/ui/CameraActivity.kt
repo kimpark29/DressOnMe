@@ -1,6 +1,5 @@
 package com.capstone.dressonme.ui
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -22,7 +21,6 @@ import com.capstone.dressonme.R
 import com.capstone.dressonme.databinding.ActivityCameraBinding
 import com.capstone.dressonme.helper.ApiCallbackString
 import com.capstone.dressonme.helper.createFile
-import com.capstone.dressonme.model.repo.ProcessRepository
 import com.capstone.dressonme.ui.CameraFragment.Companion.CAMERA_X_RESULT
 import com.capstone.dressonme.viewmodel.ProcessViewModel
 import com.capstone.dressonme.viewmodel.UserViewModel
@@ -60,24 +58,25 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun getUserProcess() {
-
         userViewModel.getUser().observe(this) {
 
             processViewModel.userProcess.observe(this) { processDetail ->
-                Toast.makeText(this@CameraActivity, "IDnya :  ${processDetail.id}", Toast.LENGTH_SHORT)
+                Toast.makeText(this@CameraActivity, "IDnya :  ${processDetail._id}", Toast.LENGTH_SHORT)
                     .show()
-                Log.d("test", processDetail.id)
+                Log.d("test", processDetail._id)
                 processViewModel.getUserProcess(it.token,
-                    processDetail.id,
+                    processDetail._id,
                     object : ApiCallbackString {
                         override fun onResponse(success: Boolean, message: String) {
                             Toast.makeText(this@CameraActivity, message, Toast.LENGTH_SHORT)
                                 .show()
                         }
-
                     })
-
             }
+        }
+
+        processViewModel.userProcess.observe(this) {
+            Toast.makeText(this@CameraActivity, "ID " +it._id, Toast.LENGTH_SHORT).show()
         }
 
     }
