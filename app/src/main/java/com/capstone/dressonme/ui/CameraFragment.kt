@@ -43,8 +43,6 @@ class CameraFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        getUserProcess()
-
         binding.btnNext.setOnClickListener {
             addImg()
 
@@ -65,27 +63,6 @@ class CameraFragment : Fragment() {
         }
     }
 
-//    private fun getUserProcess() {
-//        processViewModel.getProcess().observe(viewLifecycleOwner) { process ->
-//            Toast.makeText(context, process._id, Toast.LENGTH_SHORT).show()
-//            userViewModel.getUser().observe(viewLifecycleOwner) { user ->
-//                processViewModel.getUserProcess(user.token,
-//                    process._id,
-//                    object : ApiCallbackString {
-//                        override fun onResponse(success: Boolean, message: String) {
-//                            processViewModel.userProcess.observe(viewLifecycleOwner) {
-//                                processViewModel.saveProcess(it)
-//                                if (it.linkFiltering != "") {
-//                                    Toast.makeText(context,
-//                                        "Update User Process Success",
-//                                        Toast.LENGTH_SHORT).show()
-//                                }
-//                            }
-//                        }
-//                    })
-//            }
-//        }
-//    }
 
     private fun addImg() {
         if (getFile != null) {

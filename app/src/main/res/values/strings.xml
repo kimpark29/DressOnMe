@@ -16,13 +16,13 @@
 
     <integer-array name="data_photo">
         <item>@drawable/jascoklat</item>
+        <item>@drawable/putih</item>
         <item>@drawable/kemejacoklat</item>
         <item>@drawable/jasputih</item>
-        <item>@drawable/kemejacoklat</item>
-        <item>@drawable/kemejacoklat</item>
-        <item>@drawable/kemejacoklat</item>
-        <item>@drawable/kemejacoklat</item>
-        <item>@drawable/kemejacoklat</item>
-        <item>@drawable/kemejacoklat</item>
+        <item>@drawable/kemejaijo</item>
+        <item>@drawable/kemejakuning</item>
+        <item>@drawable/krem</item>
+        <item>@drawable/kuning</item>
     </integer-array>
+
 </resources>
