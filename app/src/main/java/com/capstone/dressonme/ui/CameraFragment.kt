@@ -1,15 +1,16 @@
 package com.capstone.dressonme.ui
 
 import android.content.Intent
+import android.content.Intent.getIntent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.capstone.dressonme.R
 import com.capstone.dressonme.databinding.FragmentCameraBinding
@@ -19,11 +20,8 @@ import com.capstone.dressonme.helper.rotateBitmap
 import com.capstone.dressonme.viewmodel.ProcessViewModel
 import com.capstone.dressonme.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+
 
 @AndroidEntryPoint
 class CameraFragment : Fragment() {
@@ -49,8 +47,9 @@ class CameraFragment : Fragment() {
 
         binding.btnNext.setOnClickListener {
             addImg()
+
             val fragmentTransition = requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransition.replace(R.id.fragmentContainer, ResultFragment()).commit()
+            fragmentTransition.replace(R.id.fragmentContainer, HomeFragment()).commit()
         }
 
         binding.btnCamera.setOnClickListener { startCameraX() }

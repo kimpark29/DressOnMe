@@ -50,12 +50,14 @@
         <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/drawable-v24/ic_baseline_camera_24.xml" value="0.1" />
         <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/drawable-v24/ic_baseline_flip_camera_android_24.xml" value="0.1" />
         <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/layout/activity_camera.xml" value="0.1" />
-        <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
+        <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/layout/activity_refresh.xml" value="0.371875" />
+        <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/layout/activity_sign_up.xml" value="0.22" />
         <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/layout/activity_splash.xml" value="0.18" />
         <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/layout/fragment_camera.xml" value="0.33" />
         <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/layout/fragment_loading.xml" value="0.371875" />
         <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/layout/fragment_model.xml" value="0.25" />
         <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/layout/fragment_result.xml" value="0.22" />
         <entry key="..\:/android studio/1.capekstone/new/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.336" />

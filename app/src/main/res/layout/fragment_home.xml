@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,7 +7,9 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:orientation="vertical"
+    android:layout_marginBottom="50dp"
     tools:context=".ui.HomeFragment">
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/detail_appbar"
@@ -24,9 +27,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
+                android:fontFamily="@font/encodesans_bold"
                 android:gravity="center"
                 android:text="@string/app_title"
-                android:fontFamily="@font/encodesans_bold"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -35,8 +38,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
-                android:text="@string/recommendation_outfit"
                 android:fontFamily="@font/encodesans_semibold"
+                android:text="@string/recommendation_outfit"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -56,27 +59,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
+            android:fontFamily="@font/encodesans_semibold"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/account_gallery"
-            android:fontFamily="@font/encodesans_semibold"
             android:textSize="20sp"
             android:textStyle="bold" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_gallery"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="10dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:spanCount="2"
-        tools:listitem="@layout/item_gallery" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="10dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_gallery" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -3,10 +3,10 @@ package com.capstone.dressonme.ui
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
@@ -120,6 +120,7 @@ class MainActivity : AppCompatActivity() {
         fragmentTransition.replace(R.id.fragmentContainer, fragment)
             .addToBackStack(Fragment::class.java.simpleName).commit()
     }
+
 
     companion object {
         const val CAMERA_X_RESULT = 200

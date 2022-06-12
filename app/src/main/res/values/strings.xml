@@ -15,9 +15,9 @@
     <string name="permission_not_granted">Permission not granted</string>
 
     <integer-array name="data_photo">
+        <item>@drawable/jascoklat</item>
         <item>@drawable/kemejacoklat</item>
-        <item>@drawable/kemejacoklat</item>
-        <item>@drawable/kemejacoklat</item>
+        <item>@drawable/jasputih</item>
         <item>@drawable/kemejacoklat</item>
         <item>@drawable/kemejacoklat</item>
         <item>@drawable/kemejacoklat</item>

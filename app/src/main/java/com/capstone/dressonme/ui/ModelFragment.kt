@@ -43,7 +43,7 @@ class ModelFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkUserProcess()
+//        checkUserProcess()
         setAction()
     }
 
@@ -99,7 +99,7 @@ class ModelFragment : Fragment() {
                                 processViewModel.saveProcess(process)
                                 val fragmentTransition =
                                     requireActivity().supportFragmentManager.beginTransaction()
-                                fragmentTransition.replace(R.id.fragmentContainer, CameraFragment())
+                                fragmentTransition.replace(R.id.fragmentContainer, LoadingFragment())
                                     .commit()
                             }
 

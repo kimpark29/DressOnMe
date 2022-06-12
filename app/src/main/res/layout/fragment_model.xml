@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Step 1 of 3"
+        android:text="Step 1 of 2"
         android:gravity="center"
         android:layout_marginTop="60dp"
         android:textSize="16sp" />

@@ -1,5 +1,6 @@
 package com.capstone.dressonme.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -40,7 +41,14 @@ class HomeFragment : Fragment() {
 
         setAdapter()
         getData()
+        binding.swipeRefresh.setOnRefreshListener {
+            startActivity(Intent(activity, MainActivity::class.java))
+            activity?.finish()
+            binding.swipeRefresh.isRefreshing = false
+        }
     }
+
+
 
     private fun setAdapter() {
         recommendationAdapter = RecommendationAdapter()
