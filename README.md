@@ -8,15 +8,21 @@ With these thought in mind, we create DressOnMe is an application where people c
 
 ## Team Member
 Machine Learning :
+
 M7005F0445 - Aileen
 
 M2010F1016 - Qonita Shobrina
 
 M7011F1160 - Fachrizky Djodjah
 
+
 Mobile Development
+
 A2007F0738 - Muchammad Ikbal Ghozali
+
 A7128F1584 - Muhammad Galih Wiyono
 
+
 Cloud Computing
+
 C2010F1015 - Adinda Dewi Lestari
