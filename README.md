@@ -23,3 +23,8 @@ Mobile Development :
 Cloud Computing :
 
 1. C2010F1015 - Adinda Dewi Lestari
+
+## Disclaimer
+1. This project is still on progress, further updates will be provided during the development time.
+2. This project is created for educational purpose as the requirement to graduate from Bangkit 2022 program
+3. The dataset used in this project: https://www.kaggle.com/datasets/balraj98/clothing-coparsing-dataset?select=images 
